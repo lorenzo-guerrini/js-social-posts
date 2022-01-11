@@ -19,7 +19,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=10"
         },
         "likes": 120,
-        "created": "2021-09-03"
+        "created": "2018-09-03"
     },
     {
         "id": 3,
@@ -41,7 +41,7 @@ const posts = [
             "image": null
         },
         "likes": 56,
-        "created": "2021-04-03"
+        "created": "2021-01-03"
     },
     {
         "id": 5,
@@ -145,7 +145,34 @@ function postHTMLGen(post) {
 
 //Ritorna tempo passato da pubblicazione
 function postDateCalculator(post) {
-    return "todo";
+    //Splitta la data del post e crea una Date per essa e una per la data corrente
+    let dateArray = post.created.split("-");
+    let postDate = new Date(dateArray[0], dateArray[1], dateArray[2]);
+    let today = new Date();
+
+    //Calcola la differenza tra le due date in millisecondi e in giorni, ritorna quest'ultima se è passato meno di un mese
+    let dateDiffTime = Math.abs(today - postDate);
+    let dateDiffDays = Math.ceil(dateDiffTime / (1000 * 60 * 60 * 24));
+
+    if (dateDiffDays < 30) {
+        return dateDiffDays + " giorni fa";
+    }
+
+    //Calcola la differenza tra le due date in mesi, ritorna questa se è passato meno di un anno
+    let dateDiffMonths = Math.ceil(dateDiffDays / 30);
+
+    if (dateDiffMonths < 12) {
+        return dateDiffMonths + " mesi fa"
+    }
+
+    //Calcola la differenza tra le due date in anni, ritorna questa se è passato almeno un anno
+    let dateDiffYears = Math.ceil(dateDiffMonths / 12)
+
+    if (dateDiffYears == 1) {
+        return "1 anno fa";
+    }
+
+    return dateDiffYears + " anni fa";
 }
 
 //Stampa nel postsContainer i post
@@ -153,6 +180,10 @@ function postsPrinter() {
     for (let i = 0; i < posts.length; i++) {
         postsContainer.innerHTML += postHTMLGen(posts[i]);
     }
+}
+
+function dateSplitter (date) {
+    return date.split("-");
 }
 
 //Formatta le date di tutti i post in formato Americano
