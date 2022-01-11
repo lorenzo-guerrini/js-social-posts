@@ -182,10 +182,6 @@ function postsPrinter() {
     }
 }
 
-function dateSplitter(date) {
-    return date.split("-");
-}
-
 //Formatta le date di tutti i post in formato Americano
 function formatUSDateAll() {
     for (let i = 0; i < posts.length; i++) {
