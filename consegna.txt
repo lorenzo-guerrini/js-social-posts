@@ -17,9 +17,9 @@ Per le immagini va bene utilizzare qualsiasi servizio di placeholder ad es. Unsp
 Milestone 2 - FATTO
 Prendendo come riferimento il layout di esempio presente nell’html, stampiamo i post del nostro feed. - FATTO
 
-Milestone 3
-Se clicchiamo sul tasto “Mi Piace” cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo.
-Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+Milestone 3 - FATTO
+Se clicchiamo sul tasto “Mi Piace” cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo. - FATTO
+Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like. - FATTO
 
 BONUS
 1. Formattare le date in formato italiano (gg/mm/aaaa)

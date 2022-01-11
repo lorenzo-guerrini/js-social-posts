@@ -207,25 +207,41 @@ function formatUSDateAll() {
 function likeButtonsGen() {
     for (let i = 0; i < posts.length; i++) {
 
+        //Variabili ID post e bottone like
         const postID = posts[i].id;
         let likeButton = document.querySelector("#post-" + postID + " .like-button");
 
+        //Aggiunge EventListener per gestire i like
         likeButton.addEventListener("click", function () {
+            //Variabili likesCounter HTML e post selezionato
             let likesCounter = document.querySelector("#post-" + postID + " .js-likes-counter");
-
             let selectedPost = posts[i];
+
+            //Prima volta che si mette like
             if (!likedPostsIDs.includes(postID)) {
+                //Aggiunge ID post ad array contenente tutti gli ID
                 likedPostsIDs.push(postID);
+
+                //Aggiunge classe che colora bottone di verde il bottone like
                 likeButton.classList.add("like-button--liked")
 
+                //Aumenta i like di 1 nell'oggetto e aggiorna il contatore sulla pagina
                 selectedPost.likes++;
                 likesCounter.innerHTML = selectedPost.likes;
 
-            } else {
+            }
+            //Secondo click - Si rimuove il like
+            else {
+                //Trova l'index dell'ID all'interno dell'Array contenente tutti gli ID
                 likedPostIndex = findIndexOf(postID, likedPostsIDs);
-                likedPostsIDs.splice(likedPostIndex, 1)
-                likeButton.classList.remove("like-button--liked")
 
+                //Rimuove l'ID dall'array degli ID
+                likedPostsIDs.splice(likedPostIndex, 1);
+
+                //Rimuove classe che colora di verde il bottone like
+                likeButton.classList.remove("like-button--liked");
+
+                //Toglie un like nell'oggetto e aggiorna il contatore sulla pagina
                 selectedPost.likes--;
                 likesCounter.innerHTML = selectedPost.likes;
             }
