@@ -78,16 +78,7 @@ formatUSDateAll();
 
 // ---- Funzioni ----
 
-//Formatta le date di tutti i post in formato Americano
-function formatUSDateAll() {
-    for (let i = 0; i < posts.length; i++) {
-        let dateArray = posts[i].created.split("-");
-        let newDate = dateArray[1] + "-" + dateArray[2] + "-" + dateArray[0];
-        posts[i].created = newDate;
-    }
-}
-
-//Genera una stringa contenente l'HTML del post
+//Ritorna una stringa contenente l'HTML del post
 function postHTMLGen(post) {
     //Crea post temporaneo e ne inizia a generale l'html
     let tempPostHTML = `
@@ -152,12 +143,23 @@ function postHTMLGen(post) {
     return tempPostHTML;
 }
 
+//Ritorna tempo passato da pubblicazione
 function postDateCalculator(post) {
     return "todo";
 }
 
+//Stampa nel postsContainer i post
 function postsPrinter() {
     for (let i = 0; i < posts.length; i++) {
         postsContainer.innerHTML += postHTMLGen(posts[i]);
+    }
+}
+
+//Formatta le date di tutti i post in formato Americano
+function formatUSDateAll() {
+    for (let i = 0; i < posts.length; i++) {
+        let dateArray = posts[i].created.split("-");
+        let newDate = dateArray[1] + "-" + dateArray[2] + "-" + dateArray[0];
+        posts[i].created = newDate;
     }
 }
