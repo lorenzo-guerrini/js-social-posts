@@ -84,9 +84,11 @@ postsPrinter();
 //Aggiunge funzionalità ai like button
 likeButtonsGen()
 
-//Fotmatta le date
-formatUSDateAll();
+//Fotmatta le date in formato US
+//formatUSDateAll();
 
+//Formatta le date in formato IT
+formatITDateAll()
 
 // ---- FUNZIONI ----
 
@@ -200,15 +202,6 @@ function postsPrinter() {
     }
 }
 
-//Formatta le date di tutti i post in formato Americano
-function formatUSDateAll() {
-    for (let i = 0; i < posts.length; i++) {
-        let dateArray = posts[i].created.split("-");
-        let newDate = dateArray[1] + "-" + dateArray[2] + "-" + dateArray[0];
-        posts[i].created = newDate;
-    }
-}
-
 //Permette di mettere like
 function likeButtonsGen() {
     for (let i = 0; i < posts.length; i++) {
@@ -252,7 +245,6 @@ function likeButtonsGen() {
                 likesCounter.innerHTML = selectedPost.likes;
             }
         });
-
     }
 }
 
@@ -265,4 +257,22 @@ function findIndexOf(value, array) {
         }
     }
     return index;
+}
+
+//Formatta le date di tutti i post in formato Americano
+function formatUSDateAll() {
+    for (let i = 0; i < posts.length; i++) {
+        let dateArray = posts[i].created.split("-");
+        let newDate = dateArray[1] + "-" + dateArray[2] + "-" + dateArray[0];
+        posts[i].created = newDate;
+    }
+}
+
+//Formatta le date di tutti i post in formato italiano
+function formatITDateAll() {
+    for (let i = 0; i < posts.length; i++) {
+        let dateArray = posts[i].created.split("-");
+        let newDate = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
+        posts[i].created = newDate;
+    }
 }
