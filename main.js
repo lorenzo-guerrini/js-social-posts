@@ -67,14 +67,94 @@ const posts = [
     }
 ];
 
-//Formatta le date in formato Americano
-function formatUSDate() {
+//Variabile postsContainer
+const postsContainer = document.getElementById("container");
+
+//Formatta le date di tutti i post in formato Americano
+function formatUSDateAll() {
     for (let i = 0; i < posts.length; i++) {
         let dateArray = posts[i].created.split("-");
         let newDate = dateArray[1] + "-" + dateArray[2] + "-" + dateArray[0];
         posts[i].created = newDate;
     }
 }
+//Fotmatta le date
+formatUSDateAll();
 
-formatUSDate();
-console.log(posts);
+//Stampa i post
+postsPrinter();
+
+//Genera una stringa contenente l'HTML del post
+function postHTMLGen(post) {
+    //Crea post temporaneo e ne inizia a generale l'html
+    let tempPostHTML = `
+        <div class="post">
+            <div class="post__header">
+                <div class="post-meta">
+                `;
+
+    //Se author ha propic la inserisce nel post, altrimenti mette le sue iniziali
+    if (post.author.image) {
+        tempPostHTML += `
+                    <div class="post-meta__icon">
+                        <img class="profile-pic" src="${post.author.image}" alt="${post.author.name}">
+                    </div>
+                    `;
+    } else {
+        tempPostHTML += `
+                    <div class="post-meta__icon">
+                        <div class="profile-pic no-img">TODO</div>
+                    </div>
+                    `;
+    }
+
+    //Inserisce nome autore e data del post
+    tempPostHTML += `
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${post.author.name}</div>
+                        <div class="post-meta__time">${postDateCalculator(post)}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="post__text">${post.content}</div>
+            `;
+    
+    //Se il post ha immagini le inserisce
+    if (post.media) {
+        tempPostHTML += `
+        <div class="post__image">
+                <img src="${post.media}" alt="">
+        </div>
+        `;
+    }
+
+    //Finisce HTML con like buttone contatore like
+    tempPostHTML += `
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-1" class="js-likes-counter">${post.likes}</b> persone
+                    </div>
+                </div>
+            </div>
+        </div>
+   `
+
+   return tempPostHTML;
+}
+
+function postDateCalculator(post) {
+    return "todo";
+}
+
+function postsPrinter() {
+    for (let i = 0; i < posts.length; i++) {
+        postsContainer.innerHTML += postHTMLGen(posts[i]);
+    }
+}
