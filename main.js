@@ -82,7 +82,7 @@ formatUSDateAll();
 function postHTMLGen(post) {
     //Crea post temporaneo e ne inizia a generale l'html
     let tempPostHTML = `
-        <div class="post">
+        <div class="post" id=post-${post.id}>
             <div class="post__header">
                 <div class="post-meta">
                 `;
@@ -122,12 +122,12 @@ function postHTMLGen(post) {
         `;
     }
 
-    //Finisce HTML con like buttone contatore like
+    //Finisce HTML con like button e contatore like
     tempPostHTML += `
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <a class="like-button  js-like-button" href="#!" data-postid="1">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
@@ -189,4 +189,39 @@ function formatUSDateAll() {
         let newDate = dateArray[1] + "-" + dateArray[2] + "-" + dateArray[0];
         posts[i].created = newDate;
     }
+}
+
+let likedPostsIDs = [];
+
+let id = 2;
+
+let likeButton = document.querySelector("#post-" + id + " .like-button");
+
+likeButton.addEventListener("click", function() {
+    let likesCounter = document.querySelector("#post-" + id + " .js-likes-counter");
+
+    let selectedPost = posts[id - 1];
+
+    if (!likedPostsIDs.includes(id)) {
+        likedPostsIDs.push(id);
+        
+        selectedPost.likes++;
+        likesCounter.innerHTML = selectedPost.likes;
+
+    } else {
+        likedPostsIDs.splice(findIndexOf(id, posts), 1)
+        selectedPost.likes--;
+        likesCounter.innerHTML = selectedPost.likes;
+    }
+    
+});
+
+//Trova l'index di un valore all'interno di un array
+function findIndexOf(value, array) {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] == value) {
+            return i;
+        }
+    }
+    return NaN;
 }
