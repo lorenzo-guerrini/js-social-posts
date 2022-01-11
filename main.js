@@ -182,7 +182,7 @@ function postsPrinter() {
     }
 }
 
-function dateSplitter (date) {
+function dateSplitter(date) {
     return date.split("-");
 }
 
