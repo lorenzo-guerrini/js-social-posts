@@ -109,7 +109,7 @@ function postHTMLGen(post) {
     } else {
         tempPostHTML += `
                     <div class="post-meta__icon">
-                        <div class="profile-pic no-img">TODO</div>
+                        <div class="profile-pic-default"><span>${noProPicFallback(post)}</span></div>
                     </div>
                     `;
     }
@@ -153,6 +153,12 @@ function postHTMLGen(post) {
    `
 
     return tempPostHTML;
+}
+
+//Ritorna iniziali nome autore
+function noProPicFallback(post) {
+    let nameArray = post.author.name.split(" ");
+    return nameArray[0][0] + nameArray[1][0];
 }
 
 //Ritorna tempo passato da pubblicazione
