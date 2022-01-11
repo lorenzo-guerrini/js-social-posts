@@ -206,26 +206,29 @@ function formatUSDateAll() {
 //Permette di mettere like
 function likeButtonsGen() {
     for (let i = 0; i < posts.length; i++) {
-        let postID = posts[i].id;
+
+        const postID = posts[i].id;
         let likeButton = document.querySelector("#post-" + postID + " .like-button");
 
         likeButton.addEventListener("click", function () {
             let likesCounter = document.querySelector("#post-" + postID + " .js-likes-counter");
 
-            let selectedPost = posts[postID - 1];
-
+            let selectedPost = posts[i];
             if (!likedPostsIDs.includes(postID)) {
                 likedPostsIDs.push(postID);
+                likeButton.classList.add("like-button--liked")
 
                 selectedPost.likes++;
                 likesCounter.innerHTML = selectedPost.likes;
 
             } else {
-                likedPostsIDs.splice(findIndexOf(postID, posts), 1)
+                likedPostIndex = findIndexOf(postID, likedPostsIDs);
+                likedPostsIDs.splice(likedPostIndex, 1)
+                likeButton.classList.remove("like-button--liked")
+
                 selectedPost.likes--;
                 likesCounter.innerHTML = selectedPost.likes;
             }
-
         });
 
     }
@@ -233,10 +236,11 @@ function likeButtonsGen() {
 
 //Trova l'index di un valore all'interno di un array
 function findIndexOf(value, array) {
+    let index;
     for (let i = 0; i < array.length; i++) {
         if (array[i] == value) {
-            return i;
+            index = i;
         }
     }
-    return NaN;
+    return index;
 }
