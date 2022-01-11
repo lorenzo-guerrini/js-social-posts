@@ -67,16 +67,28 @@ const posts = [
     }
 ];
 
+
+// ---- VARIABILI ----
+
 //Variabile postsContainer
 const postsContainer = document.getElementById("container");
 
+//Array contente ID dei post a cui è stato messo like
+let likedPostsIDs = [];
+
+
+// ---- FUNZIONI DA ESEGUIRE ----
 //Stampa i post
 postsPrinter();
+
+//Aggiunge funzionalità ai like button
+likeButtonsGen()
 
 //Fotmatta le date
 formatUSDateAll();
 
-// ---- Funzioni ----
+
+// ---- FUNZIONI ----
 
 //Ritorna una stringa contenente l'HTML del post
 function postHTMLGen(post) {
@@ -191,30 +203,33 @@ function formatUSDateAll() {
     }
 }
 
-let likedPostsIDs = [];
+//Permette di mettere like
+function likeButtonsGen() {
+    for (let i = 0; i < posts.length; i++) {
+        let postID = posts[i].id;
+        let likeButton = document.querySelector("#post-" + postID + " .like-button");
 
-let id = 2;
+        likeButton.addEventListener("click", function () {
+            let likesCounter = document.querySelector("#post-" + postID + " .js-likes-counter");
 
-let likeButton = document.querySelector("#post-" + id + " .like-button");
+            let selectedPost = posts[postID - 1];
 
-likeButton.addEventListener("click", function() {
-    let likesCounter = document.querySelector("#post-" + id + " .js-likes-counter");
+            if (!likedPostsIDs.includes(postID)) {
+                likedPostsIDs.push(postID);
 
-    let selectedPost = posts[id - 1];
+                selectedPost.likes++;
+                likesCounter.innerHTML = selectedPost.likes;
 
-    if (!likedPostsIDs.includes(id)) {
-        likedPostsIDs.push(id);
-        
-        selectedPost.likes++;
-        likesCounter.innerHTML = selectedPost.likes;
+            } else {
+                likedPostsIDs.splice(findIndexOf(postID, posts), 1)
+                selectedPost.likes--;
+                likesCounter.innerHTML = selectedPost.likes;
+            }
 
-    } else {
-        likedPostsIDs.splice(findIndexOf(id, posts), 1)
-        selectedPost.likes--;
-        likesCounter.innerHTML = selectedPost.likes;
+        });
+
     }
-    
-});
+}
 
 //Trova l'index di un valore all'interno di un array
 function findIndexOf(value, array) {
