@@ -82,13 +82,13 @@ let likedPostsIDs = [];
 postsPrinter();
 
 //Aggiunge funzionalità ai like button
-likeButtonsGen()
+likeButtonsGen();               
 
 //Fotmatta le date in formato US
 //formatUSDateAll();
 
 //Formatta le date in formato IT
-formatITDateAll()
+formatITDateAll();
 
 // ---- FUNZIONI ----
 
@@ -152,7 +152,7 @@ function postHTMLGen(post) {
                 </div>
             </div>
         </div>
-   `
+   `;
 
     return tempPostHTML;
 }
@@ -182,7 +182,7 @@ function postDateCalculator(post) {
     let dateDiffMonths = Math.ceil(dateDiffDays / 30);
 
     if (dateDiffMonths < 12) {
-        return dateDiffMonths + " mesi fa"
+        return dateDiffMonths + " mesi fa";
     }
 
     //Calcola la differenza tra le due date in anni, ritorna questa se è passato almeno un anno
@@ -222,7 +222,7 @@ function likeButtonsGen() {
                 likedPostsIDs.push(postID);
 
                 //Aggiunge classe che colora bottone di verde il bottone like
-                likeButton.classList.add("like-button--liked")
+                likeButton.classList.add("like-button--liked");
 
                 //Aumenta i like di 1 nell'oggetto e aggiorna il contatore sulla pagina
                 selectedPost.likes++;
