@@ -70,6 +70,14 @@ const posts = [
 //Variabile postsContainer
 const postsContainer = document.getElementById("container");
 
+//Stampa i post
+postsPrinter();
+
+//Fotmatta le date
+formatUSDateAll();
+
+// ---- Funzioni ----
+
 //Formatta le date di tutti i post in formato Americano
 function formatUSDateAll() {
     for (let i = 0; i < posts.length; i++) {
@@ -78,11 +86,6 @@ function formatUSDateAll() {
         posts[i].created = newDate;
     }
 }
-//Fotmatta le date
-formatUSDateAll();
-
-//Stampa i post
-postsPrinter();
 
 //Genera una stringa contenente l'HTML del post
 function postHTMLGen(post) {
@@ -118,7 +121,7 @@ function postHTMLGen(post) {
             </div>
             <div class="post__text">${post.content}</div>
             `;
-    
+
     //Se il post ha immagini le inserisce
     if (post.media) {
         tempPostHTML += `
@@ -146,7 +149,7 @@ function postHTMLGen(post) {
         </div>
    `
 
-   return tempPostHTML;
+    return tempPostHTML;
 }
 
 function postDateCalculator(post) {
