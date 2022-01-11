@@ -53,5 +53,28 @@ const posts = [
         },
         "likes": 95,
         "created": "2021-03-05"
+    },
+    {
+        "id": 6,
+        "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
+        "media": null,
+        "author": {
+            "name": "Mario Rossi",
+            "image": null
+        },
+        "likes": 118,
+        "created": "2021-12-21"
     }
 ];
+
+//Formatta le date in formato Americano
+function formatUSDate() {
+    for (let i = 0; i < posts.length; i++) {
+        let dateArray = posts[i].created.split("-");
+        let newDate = dateArray[1] + "-" + dateArray[2] + "-" + dateArray[0];
+        posts[i].created = newDate;
+    }
+}
+
+formatUSDate();
+console.log(posts);
