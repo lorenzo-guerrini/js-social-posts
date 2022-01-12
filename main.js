@@ -78,17 +78,19 @@ let likedPostsIDs = [];
 
 
 // ---- FUNZIONI DA ESEGUIRE ----
+
 //Stampa i post
 postsPrinter();
 
 //Aggiunge funzionalità ai like button
-likeButtonsGen();               
+likeButtonsGen();
 
 //Fotmatta le date in formato US
 //formatUSDateAll();
 
 //Formatta le date in formato IT
 formatITDateAll();
+
 
 // ---- FUNZIONI ----
 
@@ -141,7 +143,7 @@ function postHTMLGen(post) {
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#!" data-postid="1">
+                        <a class="like-button  js-like-button" href="#">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
@@ -157,10 +159,10 @@ function postHTMLGen(post) {
     return tempPostHTML;
 }
 
-//Ritorna iniziali nome autore
+//Ritorna iniziali primo nome autore e ultimo cognome
 function noProPicFallback(post) {
     let nameArray = post.author.name.split(" ");
-    return nameArray[0][0] + nameArray[1][0];
+    return nameArray[0][0] + nameArray[nameArray.length - 1][0];
 }
 
 //Ritorna tempo passato da pubblicazione
@@ -211,7 +213,10 @@ function likeButtonsGen() {
         let likeButton = document.querySelector("#post-" + postID + " .like-button");
 
         //Aggiunge EventListener per gestire i like
-        likeButton.addEventListener("click", function () {
+        likeButton.addEventListener("click", function (e) {
+            //Previene href
+            e.preventDefault;
+
             //Variabili likesCounter HTML e post selezionato
             let likesCounter = document.querySelector("#post-" + postID + " .js-likes-counter");
             let selectedPost = posts[i];
@@ -227,8 +232,8 @@ function likeButtonsGen() {
                 //Aumenta i like di 1 nell'oggetto e aggiorna il contatore sulla pagina
                 selectedPost.likes++;
                 likesCounter.innerHTML = selectedPost.likes;
-
             }
+
             //Secondo click - Si rimuove il like
             else {
                 //Trova l'index dell'ID all'interno dell'Array contenente tutti gli ID
